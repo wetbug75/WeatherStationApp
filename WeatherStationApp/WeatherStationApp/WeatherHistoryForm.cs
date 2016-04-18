@@ -10,14 +10,11 @@ using System.Windows.Forms;
 
 namespace WeatherStationApp
 {
-    public partial class Form1 : Form
+    public partial class WeatherHistoryForm : Form
     {
-        public Form1()
+        public WeatherHistoryForm()
         {
             InitializeComponent();
-
-            WeatherHistoryForm test = new WeatherHistoryForm();
-            test.Show();
         }
     }
 }
