@@ -58,6 +58,7 @@
     <Compile Include="WeatherHistoryForm.Designer.cs">
       <DependentUpon>WeatherHistoryForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="WeatherInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

@@ -18,6 +18,12 @@ namespace WeatherStationApp
 
             WeatherHistoryForm test = new WeatherHistoryForm();
             test.Show();
+            
+        }
+
+        private void setWeatherButton_Click(object sender, EventArgs e)
+        {
+            System.Console.WriteLine(monthCalendar.SelectionStart.ToString());
         }
     }
 }

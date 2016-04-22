@@ -48,13 +48,14 @@
             this.label9 = new System.Windows.Forms.Label();
             this.timeTempLabel = new System.Windows.Forms.Label();
             this.timePrecipLabel = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.setWeatherButton = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // monthCalendar
             // 
             this.monthCalendar.Location = new System.Drawing.Point(18, 18);
+            this.monthCalendar.MaxSelectionCount = 1;
             this.monthCalendar.Name = "monthCalendar";
             this.monthCalendar.TabIndex = 1;
             // 
@@ -245,14 +246,15 @@
             this.timePrecipLabel.TabIndex = 20;
             this.timePrecipLabel.Text = "0%";
             // 
-            // button1
+            // setWeatherButton
             // 
-            this.button1.Location = new System.Drawing.Point(18, 327);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(85, 23);
-            this.button1.TabIndex = 21;
-            this.button1.Text = "Set Weather";
-            this.button1.UseVisualStyleBackColor = true;
+            this.setWeatherButton.Location = new System.Drawing.Point(18, 327);
+            this.setWeatherButton.Name = "setWeatherButton";
+            this.setWeatherButton.Size = new System.Drawing.Size(85, 23);
+            this.setWeatherButton.TabIndex = 21;
+            this.setWeatherButton.Text = "Set Weather";
+            this.setWeatherButton.UseVisualStyleBackColor = true;
+            this.setWeatherButton.Click += new System.EventHandler(this.setWeatherButton_Click);
             // 
             // label10
             // 
@@ -269,7 +271,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(630, 378);
             this.Controls.Add(this.label10);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.setWeatherButton);
             this.Controls.Add(this.timePrecipLabel);
             this.Controls.Add(this.timeTempLabel);
             this.Controls.Add(this.label9);
@@ -320,7 +322,7 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label timeTempLabel;
         private System.Windows.Forms.Label timePrecipLabel;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button setWeatherButton;
         private System.Windows.Forms.Label label10;
     }
 }
