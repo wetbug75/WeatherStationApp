@@ -8,10 +8,10 @@ namespace WeatherStationApp
 {
     public class WeatherInfo
     {
-        readonly int DATA_AMMOUNT = 6;
-        readonly int HOURS = 24;
-        int[,,] data;
-        string[] dates;
+        public readonly int DATA_AMMOUNT = 6;
+        public readonly int HOURS = 24;
+        public int[,,] data;
+        public string[] dates;
 
         public WeatherInfo(int numDates)
         {
@@ -41,22 +41,34 @@ namespace WeatherStationApp
                     index = i;
             }
 
-            for(int i = 0; i < HOURS; i++)
+            if(index == -1)
+                return new int[] { -1 };
+
+            for (int i = 0; i < DATA_AMMOUNT; i++)
             {
-                if(index == i)
-                {
-                    for(int j = 0; j < DATA_AMMOUNT; j++)
-                    {
-                        info[j] = data[index, i, j];
-                    }
-                    return info;
-                }
+                info[i] = data[index, hour, i];
             }
-            return new int[] { -1 };
+            return info;
+
+            //for(int i = 0; i < HOURS; i++)
+            //{
+            //    if(index == i)
+            //    {
+            //        for(int j = 0; j < DATA_AMMOUNT; j++)
+            //        {
+            //            info[j] = data[index, i, j];
+            //        }
+            //        return info;
+            //    }
+            //}
+            //
         }
 
         public void AddInfo(string date, int hour, int[] info)
         {
+            if (hour >= HOURS || hour < 0)
+                return;
+
             //finds index
             int index = -1;
             for(int i = 0; i < dates.Length; i++)
@@ -77,7 +89,7 @@ namespace WeatherStationApp
                 }
             }
 
-            //enters dataa
+            //enters data
             for(int i = 0; i < DATA_AMMOUNT; i++)
             {
                 data[index, hour, i] = info[i];

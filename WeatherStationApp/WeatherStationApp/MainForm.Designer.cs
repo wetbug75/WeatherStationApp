@@ -1,6 +1,6 @@
 ﻿namespace WeatherStationApp
 {
-    partial class Form1
+    partial class MainForm
     {
         /// <summary>
         /// Required designer variable.
@@ -50,6 +50,7 @@
             this.timePrecipLabel = new System.Windows.Forms.Label();
             this.setWeatherButton = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
+            this.tempLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // monthCalendar
@@ -58,6 +59,7 @@
             this.monthCalendar.MaxSelectionCount = 1;
             this.monthCalendar.Name = "monthCalendar";
             this.monthCalendar.TabIndex = 1;
+            this.monthCalendar.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar_DateChanged);
             // 
             // label1
             // 
@@ -73,6 +75,7 @@
             this.timeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.timeComboBox.FormattingEnabled = true;
             this.timeComboBox.Items.AddRange(new object[] {
+            "12:00",
             "1:00",
             "2:00",
             "3:00",
@@ -83,12 +86,12 @@
             "8:00",
             "9:00",
             "10:00",
-            "11:00",
-            "12:00"});
+            "11:00"});
             this.timeComboBox.Location = new System.Drawing.Point(54, 192);
             this.timeComboBox.Name = "timeComboBox";
             this.timeComboBox.Size = new System.Drawing.Size(125, 21);
             this.timeComboBox.TabIndex = 3;
+            this.timeComboBox.SelectedIndexChanged += new System.EventHandler(this.timeComboBox_SelectedIndexChanged);
             // 
             // ampmComboBox
             // 
@@ -101,6 +104,7 @@
             this.ampmComboBox.Name = "ampmComboBox";
             this.ampmComboBox.Size = new System.Drawing.Size(60, 21);
             this.ampmComboBox.TabIndex = 4;
+            this.ampmComboBox.SelectedIndexChanged += new System.EventHandler(this.ampmComboBox_SelectedIndexChanged);
             // 
             // stateLabel
             // 
@@ -265,11 +269,21 @@
             this.label10.TabIndex = 22;
             this.label10.Text = "Specify Date:";
             // 
-            // Form1
+            // tempLabel
+            // 
+            this.tempLabel.AutoSize = true;
+            this.tempLabel.Location = new System.Drawing.Point(21, 240);
+            this.tempLabel.Name = "tempLabel";
+            this.tempLabel.Size = new System.Drawing.Size(41, 13);
+            this.tempLabel.TabIndex = 23;
+            this.tempLabel.Text = "label11";
+            // 
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(630, 378);
+            this.Controls.Add(this.tempLabel);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.setWeatherButton);
             this.Controls.Add(this.timePrecipLabel);
@@ -292,8 +306,8 @@
             this.Controls.Add(this.timeComboBox);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.monthCalendar);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.Name = "Form1";
+            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Name = "MainForm";
             this.Text = "Form1";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -324,6 +338,7 @@
         private System.Windows.Forms.Label timePrecipLabel;
         private System.Windows.Forms.Button setWeatherButton;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label tempLabel;
     }
 }
 

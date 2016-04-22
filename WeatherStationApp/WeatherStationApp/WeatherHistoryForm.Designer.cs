@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.stepButton = new System.Windows.Forms.Button();
+            this.hourUpDown = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -41,40 +41,56 @@
             this.pressureUpDown = new System.Windows.Forms.NumericUpDown();
             this.windUpDown = new System.Windows.Forms.NumericUpDown();
             this.precipitationUpDown = new System.Windows.Forms.NumericUpDown();
-            this.trackBar1 = new System.Windows.Forms.TrackBar();
-            this.trackBar2 = new System.Windows.Forms.TrackBar();
+            this.humidityTrackBar = new System.Windows.Forms.TrackBar();
+            this.cloudTrackBar = new System.Windows.Forms.TrackBar();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.timeLabel = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.hourUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tempUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pressureUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.windUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.precipitationUpDown)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.humidityTrackBar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cloudTrackBar)).BeginInit();
             this.SuspendLayout();
             // 
-            // button1
+            // stepButton
             // 
-            this.button1.Location = new System.Drawing.Point(210, 208);
-            this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(90, 35);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Step";
-            this.button1.UseVisualStyleBackColor = true;
+            this.stepButton.Location = new System.Drawing.Point(210, 208);
+            this.stepButton.Margin = new System.Windows.Forms.Padding(2);
+            this.stepButton.Name = "stepButton";
+            this.stepButton.Size = new System.Drawing.Size(90, 35);
+            this.stepButton.TabIndex = 0;
+            this.stepButton.Text = "Step";
+            this.stepButton.UseVisualStyleBackColor = true;
+            this.stepButton.Click += new System.EventHandler(this.stepButton_Click);
             // 
-            // numericUpDown1
+            // hourUpDown
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(210, 185);
-            this.numericUpDown1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(90, 20);
-            this.numericUpDown1.TabIndex = 1;
+            this.hourUpDown.Location = new System.Drawing.Point(210, 185);
+            this.hourUpDown.Margin = new System.Windows.Forms.Padding(2);
+            this.hourUpDown.Maximum = new decimal(new int[] {
+            24,
+            0,
+            0,
+            0});
+            this.hourUpDown.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.hourUpDown.Name = "hourUpDown";
+            this.hourUpDown.Size = new System.Drawing.Size(90, 20);
+            this.hourUpDown.TabIndex = 1;
+            this.hourUpDown.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // label1
             // 
@@ -181,21 +197,21 @@
             this.precipitationUpDown.Size = new System.Drawing.Size(120, 20);
             this.precipitationUpDown.TabIndex = 19;
             // 
-            // trackBar1
+            // humidityTrackBar
             // 
-            this.trackBar1.Location = new System.Drawing.Point(204, 27);
-            this.trackBar1.Maximum = 100;
-            this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Size = new System.Drawing.Size(516, 45);
-            this.trackBar1.TabIndex = 20;
+            this.humidityTrackBar.Location = new System.Drawing.Point(204, 27);
+            this.humidityTrackBar.Maximum = 100;
+            this.humidityTrackBar.Name = "humidityTrackBar";
+            this.humidityTrackBar.Size = new System.Drawing.Size(516, 45);
+            this.humidityTrackBar.TabIndex = 20;
             // 
-            // trackBar2
+            // cloudTrackBar
             // 
-            this.trackBar2.Location = new System.Drawing.Point(204, 92);
-            this.trackBar2.Maximum = 100;
-            this.trackBar2.Name = "trackBar2";
-            this.trackBar2.Size = new System.Drawing.Size(516, 45);
-            this.trackBar2.TabIndex = 21;
+            this.cloudTrackBar.Location = new System.Drawing.Point(204, 92);
+            this.cloudTrackBar.Maximum = 100;
+            this.cloudTrackBar.Name = "cloudTrackBar";
+            this.cloudTrackBar.Size = new System.Drawing.Size(516, 45);
+            this.cloudTrackBar.TabIndex = 21;
             // 
             // label8
             // 
@@ -266,8 +282,8 @@
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);
-            this.Controls.Add(this.trackBar2);
-            this.Controls.Add(this.trackBar1);
+            this.Controls.Add(this.cloudTrackBar);
+            this.Controls.Add(this.humidityTrackBar);
             this.Controls.Add(this.precipitationUpDown);
             this.Controls.Add(this.windUpDown);
             this.Controls.Add(this.pressureUpDown);
@@ -279,18 +295,18 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.numericUpDown1);
-            this.Controls.Add(this.button1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Controls.Add(this.hourUpDown);
+            this.Controls.Add(this.stepButton);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "WeatherHistoryForm";
             this.Text = "WeatherHistoryForm";
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.hourUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tempUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pressureUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.windUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.precipitationUpDown)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.humidityTrackBar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cloudTrackBar)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -298,8 +314,8 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.Button stepButton;
+        private System.Windows.Forms.NumericUpDown hourUpDown;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
@@ -311,8 +327,8 @@
         private System.Windows.Forms.NumericUpDown pressureUpDown;
         private System.Windows.Forms.NumericUpDown windUpDown;
         private System.Windows.Forms.NumericUpDown precipitationUpDown;
-        private System.Windows.Forms.TrackBar trackBar1;
-        private System.Windows.Forms.TrackBar trackBar2;
+        private System.Windows.Forms.TrackBar humidityTrackBar;
+        private System.Windows.Forms.TrackBar cloudTrackBar;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
