@@ -9,3 +9,13 @@ D:\Dropbox\Sophmore\WeatherStationApp\WeatherStationApp\WeatherStationApp\obj\De
 D:\Dropbox\Sophmore\WeatherStationApp\WeatherStationApp\WeatherStationApp\obj\Debug\WeatherStationApp.csproj.GenerateResource.Cache
 D:\Dropbox\Sophmore\WeatherStationApp\WeatherStationApp\WeatherStationApp\obj\Debug\WeatherStationApp.exe
 D:\Dropbox\Sophmore\WeatherStationApp\WeatherStationApp\WeatherStationApp\obj\Debug\WeatherStationApp.pdb
+C:\Users\andre\Dropbox\Sophmore\WeatherStationApp\WeatherStationApp\WeatherStationApp\bin\Debug\WeatherStationApp.exe.config
+C:\Users\andre\Dropbox\Sophmore\WeatherStationApp\WeatherStationApp\WeatherStationApp\obj\Debug\WeatherStationApp.exe
+C:\Users\andre\Dropbox\Sophmore\WeatherStationApp\WeatherStationApp\WeatherStationApp\obj\Debug\WeatherStationApp.pdb
+C:\Users\andre\Dropbox\Sophmore\WeatherStationApp\WeatherStationApp\WeatherStationApp\bin\Debug\WeatherStationApp.exe
+C:\Users\andre\Dropbox\Sophmore\WeatherStationApp\WeatherStationApp\WeatherStationApp\bin\Debug\WeatherStationApp.pdb
+C:\Users\andre\Dropbox\Sophmore\WeatherStationApp\WeatherStationApp\WeatherStationApp\obj\Debug\WeatherStationApp.csprojResolveAssemblyReference.cache
+C:\Users\andre\Dropbox\Sophmore\WeatherStationApp\WeatherStationApp\WeatherStationApp\obj\Debug\WeatherStationApp.Form1.resources
+C:\Users\andre\Dropbox\Sophmore\WeatherStationApp\WeatherStationApp\WeatherStationApp\obj\Debug\WeatherStationApp.Properties.Resources.resources
+C:\Users\andre\Dropbox\Sophmore\WeatherStationApp\WeatherStationApp\WeatherStationApp\obj\Debug\WeatherStationApp.WeatherHistoryForm.resources
+C:\Users\andre\Dropbox\Sophmore\WeatherStationApp\WeatherStationApp\WeatherStationApp\obj\Debug\WeatherStationApp.csproj.GenerateResource.Cache
