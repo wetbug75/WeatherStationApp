@@ -223,6 +223,7 @@ namespace UnitTestProject1
             Assert.IsTrue(form.GetPriorDate("4/30/2016", 1).Equals("4/29/2016"));
             Assert.IsTrue(form.GetPriorDate("4/30/2016", 3).Equals("4/27/2016"));
             Assert.IsTrue(form.GetPriorDate("4/29/2016", 1).Equals("4/28/2016"));
+            Assert.IsTrue(form.GetPriorDate("5/2/2016", 4).Equals("4/28/2016"));
         }
     }
 }

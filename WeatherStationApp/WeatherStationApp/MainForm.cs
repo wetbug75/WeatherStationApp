@@ -154,9 +154,59 @@ namespace WeatherStationApp
             return data;
         }
 
+        //ignores leap years
+        //assumes date string is structured correctly
+        //assumes no multi-month jumps (i.e., daysAgo should never exceed at least 28)
         public string GetPriorDate(string currentDate, int daysAgo)
         {
-            return "";
+            string monthStr;
+            string dayStr = "";
+            string yearStr;
+            int c = 0;
+            while (currentDate[c] != '/')
+            {
+                c++;
+            }
+            c++;
+            dayStr += currentDate[c];
+            c++;
+            if(currentDate[c] != '/')
+            {
+                dayStr += currentDate[c];
+                c++;
+            }
+            c++;
+            yearStr = "" + currentDate[c++] + currentDate[c++] + currentDate[c++] + currentDate[c];
+            if (currentDate[1] != '/')
+                monthStr = "" + currentDate[0] + currentDate[1];
+            else
+                monthStr = "" + currentDate[0];
+
+            int month = Int32.Parse(monthStr);
+            int day = Int32.Parse(dayStr);
+            int year = Int32.Parse(yearStr);
+
+            if(day - daysAgo <= 0)
+            {
+                if (month == 3)//going to Feb
+                    day = day + 28 - daysAgo;
+                else if (month == 2 || month == 4 || month == 6 || month == 8 || month == 9 || month == 11 || month == 1)//going to 31 day month
+                    day = day + 31 - daysAgo;
+                else//going to 30 day month
+                    day = day + 30 - daysAgo;
+                month--;
+                if (month == 0)
+                {
+                    month = 12;
+                    year--;
+                }
+            }
+            else
+            {
+                day = day - daysAgo;
+            }
+
+            return month + "/" + day + "/" + year;
         }
 
         public string GetDayState(string date)

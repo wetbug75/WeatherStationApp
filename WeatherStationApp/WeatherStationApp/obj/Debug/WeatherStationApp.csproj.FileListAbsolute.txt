@@ -18,3 +18,4 @@ C:\Users\andre\Dropbox\Sophmore\WeatherStationApp\WeatherStationApp\WeatherStati
 C:\Users\andre\Dropbox\Sophmore\WeatherStationApp\WeatherStationApp\WeatherStationApp\obj\Debug\WeatherStationApp.WeatherHistoryForm.resources
 C:\Users\andre\Dropbox\Sophmore\WeatherStationApp\WeatherStationApp\WeatherStationApp\obj\Debug\WeatherStationApp.csproj.GenerateResource.Cache
 C:\Users\andre\Dropbox\Sophmore\WeatherStationApp\WeatherStationApp\WeatherStationApp\obj\Debug\WeatherStationApp.MainForm.resources
+C:\Users\andre\Dropbox\Sophmore\WeatherStationApp\WeatherStationApp\WeatherStationApp\obj\Debug\WeatherStationApp.csprojResolveAssemblyReference.cache
