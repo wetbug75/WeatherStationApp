@@ -17,18 +17,18 @@ namespace WeatherStationApp
         public MainForm()
         {
             InitializeComponent();
+            weatherInfo = new WeatherInfo(15);
             timeComboBox.SelectedIndex = 0;
             ampmComboBox.SelectedIndex = 0;
-            weatherInfo = new WeatherInfo(15);   
         }
 
         public string GetSelectedDate(string rawDate)
         {
             int dashCount = 0;
             int cutoff = 0;
-            for(int i = 0; i < rawDate.Length; i++)
+            for (int i = 0; i < rawDate.Length; i++)
             {
-                if(dashCount ==2)
+                if (dashCount == 2)
                 {
                     cutoff = i + 4;
                     break;
@@ -58,18 +58,6 @@ namespace WeatherStationApp
         {
             int[] data = GetSpecifiedData(GetSelectedDate(monthCalendar.SelectionStart.ToString()));
             string result = "";
-            for(int i = 0; i < data.Length - 1; i++)
-            {
-                result += data[i] + ", ";
-            }
-            result += data[data.Length - 1];
-            tempLabel.Text = result;
-        }
-
-        private void ampmComboBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            int[] data = GetSpecifiedData(GetSelectedDate(monthCalendar.SelectionStart.ToString()));
-            string result = "";
             for (int i = 0; i < data.Length - 1; i++)
             {
                 result += data[i] + ", ";
@@ -89,13 +77,17 @@ namespace WeatherStationApp
             }
             catch
             {
-                return new int[] {0, 0, 0, 0, 0, 0, 0};
+                return new int[] { 0, 0, 0, 0, 0, 0, 0 };
             }
         }
 
-        private void monthCalendar_DateChanged(object sender, DateRangeEventArgs e)
+        private void ampmComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            int[] data = GetSpecifiedData(GetSelectedDate(monthCalendar.SelectionStart.ToString()));
+            int hour = timeComboBox.SelectedIndex;
+            if (ampmComboBox.SelectedIndex == 1)
+                hour += 12;
+            string date = GetSelectedDate(monthCalendar.SelectionStart.ToString());
+            int[] data = GetSpecifiedData(date);
             string result = "";
             for (int i = 0; i < data.Length - 1; i++)
             {
@@ -103,46 +95,191 @@ namespace WeatherStationApp
             }
             result += data[data.Length - 1];
             tempLabel.Text = result;
+
+            stateLabel.Text = GetDayState(date);
+            lowTempLabel.Text = GetLowTemp(date) + "°";
+            highTempLabel.Text = GetHighTemp(date) + "°";
+            precipLabel.Text = GetDayPrecipitation(date) + "%";
+            windSpeedLabel.Text = GetWindSpeed(date) + " mph";
+            timeStateLabel.Text = GetHourState(date, hour);
+            timeTempLabel.Text = GetHourTemp(date, hour) + "°";
+            timePrecipLabel.Text = GetHourPrecipitation(date, hour) + "%";
         }
 
-        public string GetDayState()
+        private void monthCalendar_DateChanged(object sender, DateRangeEventArgs e)
         {
-            return "";
+            int hour = timeComboBox.SelectedIndex;
+            if (ampmComboBox.SelectedIndex == 1)
+                hour += 12;
+            string date = GetSelectedDate(monthCalendar.SelectionStart.ToString());
+            int[] data = GetSpecifiedData(date);
+            string result = "";
+            for (int i = 0; i < data.Length - 1; i++)
+            {
+                result += data[i] + ", ";
+            }
+            result += data[data.Length - 1];
+            tempLabel.Text = result;
+
+            stateLabel.Text = GetDayState(date);
+            lowTempLabel.Text = GetLowTemp(date) + "°";
+            highTempLabel.Text = GetHighTemp(date) + "°";
+            precipLabel.Text = GetDayPrecipitation(date) + "%";
+            windSpeedLabel.Text = GetWindSpeed(date) + " mph";
+            timeStateLabel.Text = GetHourState(date, hour);
+            timeTempLabel.Text = GetHourTemp(date, hour) + "°";
+            timePrecipLabel.Text = GetHourPrecipitation(date, hour) + "%";
         }
 
-        public int GetLowTemp()
+        public int[,] CreateDayData(string date)
         {
-            return 0;
+            int[,] data = new int[24, weatherInfo.DATA_AMMOUNT];
+            for (int i = 0; i < 24; i++)
+            {
+                int[] temp = weatherInfo.GetInfo(date, i);
+                for (int j = 0; j < weatherInfo.DATA_AMMOUNT; j++)
+                {
+                    data[i, j] = temp[j];
+                }
+            }
+            return data;
         }
 
-        public int GetHighTemp()
+        public int[,] CreateDayDataPrediction(string date)
         {
-            return 0;
+            int[,] data = new int[24, weatherInfo.DATA_AMMOUNT];
+
+            //unfinished
+
+            return data;
         }
 
-        public int GetDayPrecipitation()
+        public string GetDayState(string date)
         {
-            return 0;
+            WeatherForecast weatherForecast;
+            if (!weatherInfo.IsEmpty(date))
+            {
+                int[,] data = CreateDayData(date);
+                weatherForecast = new WeatherForecast(data);
+            }
+            else
+            {
+                int[,] data = CreateDayDataPrediction(date);
+                weatherForecast = new WeatherForecast(data);
+            }
+            return weatherForecast.GetDayState();
         }
 
-        public int GetWindSpeed()
+        public int GetLowTemp(string date)
         {
-            return 0;
+            WeatherForecast weatherForecast;
+            if (!weatherInfo.IsEmpty(date))
+            {
+                int[,] data = CreateDayData(date);
+                weatherForecast = new WeatherForecast(data);
+            }
+            else
+            {
+                int[,] data = CreateDayDataPrediction(date);
+                weatherForecast = new WeatherForecast(data);
+            }
+            return weatherForecast.GetLowTemp();
         }
 
-        public string GetHourState()
+        public int GetHighTemp(string date)
         {
-            return "";
+            WeatherForecast weatherForecast;
+            if (!weatherInfo.IsEmpty(date))
+            {
+                int[,] data = CreateDayData(date);
+                weatherForecast = new WeatherForecast(data);
+            }
+            else
+            {
+                int[,] data = CreateDayDataPrediction(date);
+                weatherForecast = new WeatherForecast(data);
+            }
+            return weatherForecast.GetHighTemp();
         }
 
-        public int GetHourTemp()
+        public int GetDayPrecipitation(string date)
         {
-            return 0;
+            WeatherForecast weatherForecast;
+            if (!weatherInfo.IsEmpty(date))
+            {
+                int[,] data = CreateDayData(date);
+                weatherForecast = new WeatherForecast(data);
+            }
+            else
+            {
+                int[,] data = CreateDayDataPrediction(date);
+                weatherForecast = new WeatherForecast(data);
+            }
+            return weatherForecast.GetDayPrecipitationPercentage();
         }
 
-        public int GetHourPrecipitation()
+        public int GetWindSpeed(string date)
         {
-            return 0;
+            WeatherForecast weatherForecast;
+            if (!weatherInfo.IsEmpty(date))
+            {
+                int[,] data = CreateDayData(date);
+                weatherForecast = new WeatherForecast(data);
+            }
+            else
+            {
+                int[,] data = CreateDayDataPrediction(date);
+                weatherForecast = new WeatherForecast(data);
+            }
+            return weatherForecast.GetWindSpeed();
+        }
+
+        public string GetHourState(string date, int hour)
+        {
+            WeatherForecast weatherForecast;
+            if (!weatherInfo.IsEmpty(date))
+            {
+                int[,] data = CreateDayData(date);
+                weatherForecast = new WeatherForecast(data);
+            }
+            else
+            {
+                int[,] data = CreateDayDataPrediction(date);
+                weatherForecast = new WeatherForecast(data);
+            }
+            return weatherForecast.GetHourState(hour);
+        }
+
+        public int GetHourTemp(string date, int hour)
+        {
+            WeatherForecast weatherForecast;
+            if (!weatherInfo.IsEmpty(date))
+            {
+                int[,] data = CreateDayData(date);
+                weatherForecast = new WeatherForecast(data);
+            }
+            else
+            {
+                int[,] data = CreateDayDataPrediction(date);
+                weatherForecast = new WeatherForecast(data);
+            }
+            return weatherForecast.GetHourTemp(hour);
+        }
+
+        public int GetHourPrecipitation(string date, int hour)
+        {
+            WeatherForecast weatherForecast;
+            if (!weatherInfo.IsEmpty(date))
+            {
+                int[,] data = CreateDayData(date);
+                weatherForecast = new WeatherForecast(data);
+            }
+            else
+            {
+                int[,] data = CreateDayDataPrediction(date);
+                weatherForecast = new WeatherForecast(data);
+            }
+            return weatherForecast.GetHourPrecipitationPercentage(hour);
         }
     }
 }

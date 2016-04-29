@@ -40,10 +40,11 @@ namespace UnitTestProject1
         public void StoredDataForecastTest()
         {
             MainForm form = new MainForm();
+            form.weatherInfo.dates[0] = "the date";
             for (int i = 0; i < 24; i++)
             {
                 form.weatherInfo.data[0, i, 0] = 50;//temp
-                form.weatherInfo.data[0, i, 1] = 30;//pressure
+                form.weatherInfo.data[0, i, 1] = 24;//pressure
                 form.weatherInfo.data[0, i, 2] = 10;//wind speed
                 form.weatherInfo.data[0, i, 3] = 35;//precipitation 1/100 inches
                 form.weatherInfo.data[0, i, 4] = 100;//humidity percentage
@@ -53,14 +54,14 @@ namespace UnitTestProject1
             form.weatherInfo.data[0, 20, 0] = 70;
             form.weatherInfo.data[0, 21, 0] = 30;
 
-            Assert.IsTrue(form.GetDayState().Equals("Heavy rain"));
-            Assert.IsTrue(form.GetLowTemp() == 30);
-            Assert.IsTrue(form.GetHighTemp() == 70);
-            Assert.IsTrue(form.GetDayPrecipitation() == 100);
-            Assert.IsTrue(form.GetWindSpeed() == 10);
-            Assert.IsTrue(form.GetHourState().Equals("Heavy rain"));
-            Assert.IsTrue(form.GetHourTemp() == 50);
-            Assert.IsTrue(form.GetHourPrecipitation() == 100);
+            Assert.IsTrue(form.GetDayState("the date").Equals("Heavy rain"));
+            Assert.IsTrue(form.GetLowTemp("the date") == 30);
+            Assert.IsTrue(form.GetHighTemp("the date") == 70);
+            Assert.IsTrue(form.GetDayPrecipitation("the date") == 100);
+            Assert.IsTrue(form.GetWindSpeed("the date") == 10);
+            Assert.IsTrue(form.GetHourState("the date", 2).Equals("Heavy rain"));
+            Assert.IsTrue(form.GetHourTemp("the date", 0) == 50);
+            Assert.IsTrue(form.GetHourPrecipitation("the date", 10) == 100);
         }
 
         [TestMethod]
@@ -68,10 +69,10 @@ namespace UnitTestProject1
         {
             WeatherInfo wi = new WeatherInfo(1);
             int[] n = new int[7] { 1, 2, 3, 4, 5, 6, 1};
-            wi.AddInfo("4/20/2016", 0, n);
-            Assert.IsTrue(!wi.IsEmpty("4/20/2016", 0));
-            Assert.IsTrue(wi.IsEmpty("4/20/2016", 1));
-            Assert.IsTrue(wi.IsEmpty("4/21/2016", 1));
+            for(int i = 0; i < 24; i++)
+                wi.AddInfo("4/20/2016", i, n);
+            Assert.IsTrue(!wi.IsEmpty("4/20/2016"));
+            Assert.IsTrue(wi.IsEmpty("4/21/2016"));
         }
 
         [TestMethod]
@@ -159,6 +160,56 @@ namespace UnitTestProject1
             if (info[5] != -2)
                 equal = false;
             Assert.IsTrue(equal);
+        }
+
+        [TestMethod]
+        public void CreateDayDataTest()
+        {
+            MainForm form = new MainForm();
+            form.weatherInfo.dates[0] = "the date";
+            for (int i = 0; i < 24; i++)
+            {
+                form.weatherInfo.data[0, i, 0] = 50;//temp
+                form.weatherInfo.data[0, i, 1] = 24;//pressure
+                form.weatherInfo.data[0, i, 2] = 10;//wind speed
+                form.weatherInfo.data[0, i, 3] = 35;//precipitation 1/100 inches
+                form.weatherInfo.data[0, i, 4] = 100;//humidity percentage
+                form.weatherInfo.data[0, i, 5] = 100;//cloud cover percentage
+                form.weatherInfo.data[0, i, 6] = 0;//precipitation type
+            }
+            form.weatherInfo.data[0, 3, 2] = 30;
+
+            int[,] day = form.CreateDayData("the date");
+            Assert.IsTrue(day[3, 2] == 30);
+            Assert.IsTrue(day[0, 2] == 10);
+            Assert.IsTrue(day[20, 0] == 50);
+            Assert.IsTrue(day[8, 6] == 0);
+        }
+
+        [TestMethod]
+        public void CreateDayDataPredictionTest()
+        {
+            MainForm form = new MainForm();
+            form.weatherInfo.dates[0] = "4/28/2016";
+            for (int i = 0; i < 24; i++)
+            {
+                form.weatherInfo.data[0, i, 0] = 50;//temp
+                form.weatherInfo.data[0, i, 1] = 24;//pressure
+                form.weatherInfo.data[0, i, 2] = 10;//wind speed
+                form.weatherInfo.data[0, i, 3] = 35;//precipitation 1/100 inches
+                form.weatherInfo.data[0, i, 4] = 100;//humidity percentage
+                form.weatherInfo.data[0, i, 5] = 100;//cloud cover percentage
+                form.weatherInfo.data[0, i, 6] = 0;//precipitation type
+            }
+
+            int[,] predictions = form.CreateDayDataPrediction("4/29/2016");
+            Assert.IsTrue(predictions[0, 0] < 100 && predictions[0, 0] > 0);
+            Assert.IsTrue(predictions[0, 1] <= 32 && predictions[0, 1] >= 24);
+            Assert.IsTrue(predictions[0, 2] < 50 && predictions[0, 2] >= 0);
+            Assert.IsTrue(predictions[5, 3] < 60 && predictions[5, 3] >= 0);
+            Assert.IsTrue(predictions[0, 4] <= 100 && predictions[0, 4] > 0);
+            Assert.IsTrue(predictions[0, 5] <= 100 && predictions[0, 5] >= 0);
+            Assert.IsTrue(predictions[0, 6] == 0 || predictions[0, 6] == 1 || predictions[0, 6] == 2);
         }
     }
 }

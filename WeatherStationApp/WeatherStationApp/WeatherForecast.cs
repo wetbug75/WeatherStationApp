@@ -93,7 +93,7 @@ namespace WeatherStationApp
             {
                 return "Moderate " + GetPrecipitationType(GetMostCommonPrecipitationType());
             }
-            else if (GetAverage(3) >= 0)// low precip
+            else if (GetAverage(3) > 0)// low precip
             {
                 return "Light " + GetPrecipitationType(GetMostCommonPrecipitationType());
             }
@@ -150,7 +150,7 @@ namespace WeatherStationApp
             {
                 return "Moderate " + GetPrecipitationType(data[hour, 6]);
             }
-            else if(data[hour,3] >= 0)// low precip
+            else if(data[hour,3] > 0)// low precip
             {
                 return "Light " + GetPrecipitationType(data[hour, 6]);
             }

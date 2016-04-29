@@ -31,7 +31,7 @@ namespace WeatherStationApp
             }
         }
 
-        public bool IsEmpty(string date, int hour)
+        public bool IsEmpty(string date)
         {
             int index = -1;
             for (int i = 0; i < dates.Length; i++)
@@ -42,11 +42,13 @@ namespace WeatherStationApp
 
             if (index == -1)
                 return true;
-
-            for (int i = 0; i < DATA_AMMOUNT; i++)
+            for (int hour = 0; hour < 24; hour++)
             {
-                if (data[index, hour, i] != -1)
-                    return false;
+                for (int i = 0; i < DATA_AMMOUNT; i++)
+                {
+                    if (data[index, hour, i] != -1)
+                        return false;
+                }
             }
             return true;
         }
