@@ -50,7 +50,7 @@
             this.timePrecipLabel = new System.Windows.Forms.Label();
             this.setWeatherButton = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
-            this.tempLabel = new System.Windows.Forms.Label();
+            this.weatherSetLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // monthCalendar
@@ -269,21 +269,21 @@
             this.label10.TabIndex = 22;
             this.label10.Text = "Specify Date:";
             // 
-            // tempLabel
+            // weatherSetLabel
             // 
-            this.tempLabel.AutoSize = true;
-            this.tempLabel.Location = new System.Drawing.Point(21, 240);
-            this.tempLabel.Name = "tempLabel";
-            this.tempLabel.Size = new System.Drawing.Size(41, 13);
-            this.tempLabel.TabIndex = 23;
-            this.tempLabel.Text = "label11";
+            this.weatherSetLabel.AutoSize = true;
+            this.weatherSetLabel.Location = new System.Drawing.Point(21, 240);
+            this.weatherSetLabel.Name = "weatherSetLabel";
+            this.weatherSetLabel.Size = new System.Drawing.Size(41, 13);
+            this.weatherSetLabel.TabIndex = 23;
+            this.weatherSetLabel.Text = "label11";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(630, 378);
-            this.Controls.Add(this.tempLabel);
+            this.Controls.Add(this.weatherSetLabel);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.setWeatherButton);
             this.Controls.Add(this.timePrecipLabel);
@@ -308,7 +308,7 @@
             this.Controls.Add(this.monthCalendar);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "MainForm";
-            this.Text = "Form1";
+            this.Text = "Krause\'s Weather Station";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -338,7 +338,7 @@
         private System.Windows.Forms.Label timePrecipLabel;
         private System.Windows.Forms.Button setWeatherButton;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label tempLabel;
+        private System.Windows.Forms.Label weatherSetLabel;
     }
 }
 

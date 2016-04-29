@@ -52,18 +52,7 @@ namespace WeatherStationApp
         private void PassData(object sender)
         {
             weatherInfo = (WeatherInfo)sender;
-        }
-
-        private void timeComboBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            int[] data = GetSpecifiedData(GetSelectedDate(monthCalendar.SelectionStart.ToString()));
-            string result = "";
-            for (int i = 0; i < data.Length - 1; i++)
-            {
-                result += data[i] + ", ";
-            }
-            result += data[data.Length - 1];
-            tempLabel.Text = result;
+            Action();
         }
 
         public int[] GetSpecifiedData(string date)
@@ -81,20 +70,25 @@ namespace WeatherStationApp
             }
         }
 
-        private void ampmComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        private void Action()
         {
             int hour = timeComboBox.SelectedIndex;
             if (ampmComboBox.SelectedIndex == 1)
                 hour += 12;
             string date = GetSelectedDate(monthCalendar.SelectionStart.ToString());
-            int[] data = GetSpecifiedData(date);
-            string result = "";
-            for (int i = 0; i < data.Length - 1; i++)
-            {
-                result += data[i] + ", ";
-            }
-            result += data[data.Length - 1];
-            tempLabel.Text = result;
+            if (weatherInfo.IsEmpty(date))
+                weatherSetLabel.Text = "Showing Weather Prediction";
+            else
+                weatherSetLabel.Text = "Showing Saved Weather Data";
+            //int[] data = GetSpecifiedData(date);
+            //string result = "";
+            //for (int i = 0; i < data.Length - 1; i++)
+            //{
+            //    result += data[i] + ", ";
+            //}
+            //result += data[data.Length - 1];
+            
+            //tempLabel.Text = result;
 
             stateLabel.Text = GetDayState(date);
             lowTempLabel.Text = GetLowTemp(date) + "°";
@@ -106,29 +100,19 @@ namespace WeatherStationApp
             timePrecipLabel.Text = GetHourPrecipitation(date, hour) + "%";
         }
 
+        private void timeComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Action();
+        }
+
+        private void ampmComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Action();
+        }
+
         private void monthCalendar_DateChanged(object sender, DateRangeEventArgs e)
         {
-            int hour = timeComboBox.SelectedIndex;
-            if (ampmComboBox.SelectedIndex == 1)
-                hour += 12;
-            string date = GetSelectedDate(monthCalendar.SelectionStart.ToString());
-            int[] data = GetSpecifiedData(date);
-            string result = "";
-            for (int i = 0; i < data.Length - 1; i++)
-            {
-                result += data[i] + ", ";
-            }
-            result += data[data.Length - 1];
-            tempLabel.Text = result;
-
-            stateLabel.Text = GetDayState(date);
-            lowTempLabel.Text = GetLowTemp(date) + "°";
-            highTempLabel.Text = GetHighTemp(date) + "°";
-            precipLabel.Text = GetDayPrecipitation(date) + "%";
-            windSpeedLabel.Text = GetWindSpeed(date) + " mph";
-            timeStateLabel.Text = GetHourState(date, hour);
-            timeTempLabel.Text = GetHourTemp(date, hour) + "°";
-            timePrecipLabel.Text = GetHourPrecipitation(date, hour) + "%";
+            Action();
         }
 
         public int[,] CreateDayData(string date)
@@ -145,12 +129,49 @@ namespace WeatherStationApp
             return data;
         }
 
-        public int[,] CreateDayDataPrediction(string date)
+        //check last 14 days
+        public int[,] CreateDayDataPrediction(string currentDate)
         {
-            int[,] data = new int[24, weatherInfo.DATA_AMMOUNT];
-
-            //unfinished
-
+            int[,] data = new int[weatherInfo.HOURS, weatherInfo.DATA_AMMOUNT];
+            int[,] temp;
+            string date;
+            int avgCount = 0;
+            for (int i = 1; i <= 14; i++)
+            {
+                date = GetPriorDate(currentDate, i);
+                if(!weatherInfo.IsEmpty(date))
+                {
+                    temp = CreateDayData(date);
+                    for(int x = 0; x < weatherInfo.HOURS; x++)
+                    {
+                        for(int y = 0; y < weatherInfo.DATA_AMMOUNT; y++)
+                        {
+                            data[x, y] += temp[x, y] * i;
+                        }
+                    }
+                    avgCount += i;
+                }
+            }
+            if(avgCount == 0)
+            {
+                for (int x = 0; x < weatherInfo.HOURS; x++)
+                {
+                    for (int y = 0; y < weatherInfo.DATA_AMMOUNT; y++)
+                    {
+                        data[x, y] = 0;
+                    }
+                }
+            }
+            else
+            {
+                for (int x = 0; x < weatherInfo.HOURS; x++)
+                {
+                    for (int y = 0; y < weatherInfo.DATA_AMMOUNT; y++)
+                    {
+                        data[x, y] = data[x, y] / avgCount;
+                    }
+                }
+            }
             return data;
         }
 

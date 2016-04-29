@@ -366,7 +366,7 @@
             this.Controls.Add(this.stepButton);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "WeatherHistoryForm";
-            this.Text = "WeatherHistoryForm";
+            this.Text = "Weather History Form";
             ((System.ComponentModel.ISupportInitialize)(this.hourUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tempUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pressureUpDown)).EndInit();
