@@ -8,6 +8,34 @@ namespace UnitTestProject1
     public class UnitTest1
     {
         [TestMethod]
+        public void WeatherForecastResultsTest()
+        {
+            int[,] arr = new int[24, 7];
+            for (int i = 0; i < 24; i++)
+            {
+                arr[i, 0] = 10;//temp
+                arr[i, 1] = 26;//pressure
+                arr[i, 2] = 10;//wind speed
+                arr[i, 3] = 30;//precipitation 1/100 inches
+                arr[i, 4] = 90;//humidity percentage
+                arr[i, 5] = 85;//cloud cover percentage
+                arr[i, 6] = 1;//precipitation type
+            }
+            arr[15, 0] = 15;
+            arr[20, 0] = 2;
+            WeatherForecast wf = new WeatherForecast(arr);
+            System.Console.WriteLine("day state: " + wf.GetDayState());
+            Assert.IsTrue(wf.GetDayState().Equals("Heavy snow"));
+            Assert.IsTrue(wf.GetLowTemp() == 2);
+            Assert.IsTrue(wf.GetHighTemp() == 15);
+            Assert.IsTrue(wf.GetDayPrecipitationPercentage() == 70);
+            Assert.IsTrue(wf.GetWindSpeed() == 10);
+            Assert.IsTrue(wf.GetHourState(6).Equals("Heavy snow"));
+            Assert.IsTrue(wf.GetHourTemp(15) == 15);
+            Assert.IsTrue(wf.GetHourPrecipitationPercentage(1) == 70);
+        }
+
+        [TestMethod]
         //tests to see if forecasts are acurate if data already exists for that day
         public void StoredDataForecastTest()
         {
@@ -15,9 +43,9 @@ namespace UnitTestProject1
             for (int i = 0; i < 24; i++)
             {
                 form.weatherInfo.data[0, i, 0] = 50;//temp
-                form.weatherInfo.data[0, i, 1] = 50;//pressure
+                form.weatherInfo.data[0, i, 1] = 30;//pressure
                 form.weatherInfo.data[0, i, 2] = 10;//wind speed
-                form.weatherInfo.data[0, i, 3] = 15;//precipitation inches
+                form.weatherInfo.data[0, i, 3] = 35;//precipitation 1/100 inches
                 form.weatherInfo.data[0, i, 4] = 100;//humidity percentage
                 form.weatherInfo.data[0, i, 5] = 100;//cloud cover percentage
                 form.weatherInfo.data[0, i, 6] = 0;//precipitation type
@@ -25,12 +53,12 @@ namespace UnitTestProject1
             form.weatherInfo.data[0, 20, 0] = 70;
             form.weatherInfo.data[0, 21, 0] = 30;
 
-            Assert.IsTrue(form.GetDayState().Equals("Rainy"));
+            Assert.IsTrue(form.GetDayState().Equals("Heavy rain"));
             Assert.IsTrue(form.GetLowTemp() == 30);
             Assert.IsTrue(form.GetHighTemp() == 70);
             Assert.IsTrue(form.GetDayPrecipitation() == 100);
             Assert.IsTrue(form.GetWindSpeed() == 10);
-            Assert.IsTrue(form.GetHourState().Equals("Rainy"));
+            Assert.IsTrue(form.GetHourState().Equals("Heavy rain"));
             Assert.IsTrue(form.GetHourTemp() == 50);
             Assert.IsTrue(form.GetHourPrecipitation() == 100);
         }
@@ -97,7 +125,7 @@ namespace UnitTestProject1
                 equal = false;
             if (form.weatherInfo.data[0, 2, 2] != 0)
                 equal = false;
-            if (form.weatherInfo.data[0, 2, 2] != 0)
+            if (form.weatherInfo.data[0, 2, 1] != 24)
                 equal = false;
             Assert.IsTrue(equal);
         }

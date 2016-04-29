@@ -123,9 +123,9 @@
             this.label3.Location = new System.Drawing.Point(10, 75);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(126, 13);
+            this.label3.Size = new System.Drawing.Size(176, 13);
             this.label3.TabIndex = 6;
-            this.label3.Text = "Barometric Pressure (Pa):";
+            this.label3.Text = "Barometric Pressure (in. of mercury):";
             // 
             // label4
             // 
@@ -151,9 +151,9 @@
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(12, 207);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(88, 13);
+            this.label6.Size = new System.Drawing.Size(120, 13);
             this.label6.TabIndex = 13;
-            this.label6.Text = "Precipitation (in.):";
+            this.label6.Text = "Precipitation (1/100 in.):";
             // 
             // label7
             // 
@@ -184,9 +184,24 @@
             // pressureUpDown
             // 
             this.pressureUpDown.Location = new System.Drawing.Point(13, 92);
+            this.pressureUpDown.Maximum = new decimal(new int[] {
+            32,
+            0,
+            0,
+            0});
+            this.pressureUpDown.Minimum = new decimal(new int[] {
+            24,
+            0,
+            0,
+            0});
             this.pressureUpDown.Name = "pressureUpDown";
             this.pressureUpDown.Size = new System.Drawing.Size(120, 20);
             this.pressureUpDown.TabIndex = 16;
+            this.pressureUpDown.Value = new decimal(new int[] {
+            24,
+            0,
+            0,
+            0});
             // 
             // windUpDown
             // 
