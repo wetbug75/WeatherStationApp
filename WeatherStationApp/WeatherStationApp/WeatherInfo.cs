@@ -8,7 +8,7 @@ namespace WeatherStationApp
 {
     public class WeatherInfo
     {
-        public readonly int DATA_AMMOUNT = 6;
+        public readonly int DATA_AMMOUNT = 7;
         public readonly int HOURS = 24;
         public int[,,] data;
         public string[] dates;

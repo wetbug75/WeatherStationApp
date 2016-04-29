@@ -53,6 +53,12 @@ namespace WeatherStationApp
             info[3] = (int)precipitationUpDown.Value;
             info[4] = humidityTrackBar.Value;
             info[5] = cloudTrackBar.Value;
+            if (rainRadioButton.Checked)
+                info[6] = 0;
+            else if (snowRadioButton.Checked)
+                info[6] = 1;
+            else
+                info[6] = 2;
 
             for(int i = 0; i < hours; i++)
             {

@@ -49,6 +49,10 @@
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.timeLabel = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.rainRadioButton = new System.Windows.Forms.RadioButton();
+            this.snowRadioButton = new System.Windows.Forms.RadioButton();
+            this.hailRadioButton = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.hourUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tempUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pressureUpDown)).BeginInit();
@@ -56,6 +60,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.precipitationUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.humidityTrackBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cloudTrackBar)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // stepButton
@@ -256,7 +261,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(421, 191);
+            this.label12.Location = new System.Drawing.Point(315, 192);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(70, 13);
             this.label12.TabIndex = 26;
@@ -265,17 +270,63 @@
             // timeLabel
             // 
             this.timeLabel.AutoSize = true;
-            this.timeLabel.Location = new System.Drawing.Point(497, 192);
+            this.timeLabel.Location = new System.Drawing.Point(391, 193);
             this.timeLabel.Name = "timeLabel";
             this.timeLabel.Size = new System.Drawing.Size(53, 13);
             this.timeLabel.TabIndex = 27;
             this.timeLabel.Text = "12:00 AM";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.hailRadioButton);
+            this.groupBox1.Controls.Add(this.snowRadioButton);
+            this.groupBox1.Controls.Add(this.rainRadioButton);
+            this.groupBox1.Location = new System.Drawing.Point(510, 159);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(200, 100);
+            this.groupBox1.TabIndex = 28;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Precipitation Type";
+            // 
+            // rainRadioButton
+            // 
+            this.rainRadioButton.AutoSize = true;
+            this.rainRadioButton.Location = new System.Drawing.Point(7, 20);
+            this.rainRadioButton.Name = "rainRadioButton";
+            this.rainRadioButton.Size = new System.Drawing.Size(47, 17);
+            this.rainRadioButton.TabIndex = 0;
+            this.rainRadioButton.TabStop = true;
+            this.rainRadioButton.Text = "Rain";
+            this.rainRadioButton.UseVisualStyleBackColor = true;
+            // 
+            // snowRadioButton
+            // 
+            this.snowRadioButton.AutoSize = true;
+            this.snowRadioButton.Location = new System.Drawing.Point(7, 43);
+            this.snowRadioButton.Name = "snowRadioButton";
+            this.snowRadioButton.Size = new System.Drawing.Size(52, 17);
+            this.snowRadioButton.TabIndex = 1;
+            this.snowRadioButton.TabStop = true;
+            this.snowRadioButton.Text = "Snow";
+            this.snowRadioButton.UseVisualStyleBackColor = true;
+            // 
+            // hailRadioButton
+            // 
+            this.hailRadioButton.AutoSize = true;
+            this.hailRadioButton.Location = new System.Drawing.Point(7, 66);
+            this.hailRadioButton.Name = "hailRadioButton";
+            this.hailRadioButton.Size = new System.Drawing.Size(43, 17);
+            this.hailRadioButton.TabIndex = 2;
+            this.hailRadioButton.TabStop = true;
+            this.hailRadioButton.Text = "Hail";
+            this.hailRadioButton.UseVisualStyleBackColor = true;
             // 
             // WeatherHistoryForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(732, 281);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.timeLabel);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.label11);
@@ -307,6 +358,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.precipitationUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.humidityTrackBar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cloudTrackBar)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -335,5 +388,9 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label timeLabel;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.RadioButton hailRadioButton;
+        private System.Windows.Forms.RadioButton snowRadioButton;
+        private System.Windows.Forms.RadioButton rainRadioButton;
     }
 }

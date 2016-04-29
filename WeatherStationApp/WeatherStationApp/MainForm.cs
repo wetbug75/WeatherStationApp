@@ -17,6 +17,8 @@ namespace WeatherStationApp
         public MainForm()
         {
             InitializeComponent();
+            timeComboBox.SelectedIndex = 0;
+            ampmComboBox.SelectedIndex = 0;
             weatherInfo = new WeatherInfo(15);   
         }
 
@@ -76,12 +78,24 @@ namespace WeatherStationApp
             tempLabel.Text = result;
         }
         
+        //public int GetHighTemp(int[])
+        //{
+
+        //}
+
         public int[] GetSpecifiedData(string date)
         {
-            int hour = timeComboBox.SelectedIndex;
-            if (ampmComboBox.SelectedIndex == 1)
-                hour += 12;
-            return weatherInfo.GetInfo(date, hour);
+            try
+            {
+                int hour = timeComboBox.SelectedIndex;
+                if (ampmComboBox.SelectedIndex == 1)
+                    hour += 12;
+                return weatherInfo.GetInfo(date, hour);
+            }
+            catch
+            {
+                return new int[] {0, 0, 0, 0, 0, 0};
+            }
         }
 
         private void monthCalendar_DateChanged(object sender, DateRangeEventArgs e)
