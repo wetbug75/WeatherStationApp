@@ -154,6 +154,11 @@ namespace WeatherStationApp
             return data;
         }
 
+        public string GetPriorDate(string currentDate, int daysAgo)
+        {
+            return "";
+        }
+
         public string GetDayState(string date)
         {
             WeatherForecast weatherForecast;

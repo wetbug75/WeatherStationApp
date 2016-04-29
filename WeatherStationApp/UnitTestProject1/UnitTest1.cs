@@ -211,5 +211,18 @@ namespace UnitTestProject1
             Assert.IsTrue(predictions[0, 5] <= 100 && predictions[0, 5] >= 0);
             Assert.IsTrue(predictions[0, 6] == 0 || predictions[0, 6] == 1 || predictions[0, 6] == 2);
         }
+
+        [TestMethod]
+        public void GetPriorDateTest()
+        {
+            MainForm form = new MainForm();
+            form.weatherInfo.dates[0] = "4/28/2016";
+            form.weatherInfo.dates[1] = "4/29/2016";
+            form.weatherInfo.dates[2] = "4/27/2016";
+
+            Assert.IsTrue(form.GetPriorDate("4/30/2016", 1).Equals("4/29/2016"));
+            Assert.IsTrue(form.GetPriorDate("4/30/2016", 3).Equals("4/27/2016"));
+            Assert.IsTrue(form.GetPriorDate("4/29/2016", 1).Equals("4/28/2016"));
+        }
     }
 }
