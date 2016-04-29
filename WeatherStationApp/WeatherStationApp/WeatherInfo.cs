@@ -10,7 +10,7 @@ namespace WeatherStationApp
     {
         public readonly int DATA_AMMOUNT = 7;
         public readonly int HOURS = 24;
-        public int[,,] data;
+        public int[,,] data; // [date, hour, specific data]
         public string[] dates;
 
         public WeatherInfo(int numDates)
@@ -31,6 +31,26 @@ namespace WeatherStationApp
             }
         }
 
+        public bool IsEmpty(string date, int hour)
+        {
+            int index = -1;
+            for (int i = 0; i < dates.Length; i++)
+            {
+                if (dates[i].Equals(date))
+                    index = i;
+            }
+
+            if (index == -1)
+                return true;
+
+            for (int i = 0; i < DATA_AMMOUNT; i++)
+            {
+                if (data[index, hour, i] != -1)
+                    return false;
+            }
+            return true;
+        }
+
         public int[] GetInfo(string date, int hour)
         {
             int[] info = new int[DATA_AMMOUNT];
@@ -49,19 +69,6 @@ namespace WeatherStationApp
                 info[i] = data[index, hour, i];
             }
             return info;
-
-            //for(int i = 0; i < HOURS; i++)
-            //{
-            //    if(index == i)
-            //    {
-            //        for(int j = 0; j < DATA_AMMOUNT; j++)
-            //        {
-            //            info[j] = data[index, i, j];
-            //        }
-            //        return info;
-            //    }
-            //}
-            //
         }
 
         public void AddInfo(string date, int hour, int[] info)

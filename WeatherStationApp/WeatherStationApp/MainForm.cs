@@ -77,11 +77,6 @@ namespace WeatherStationApp
             result += data[data.Length - 1];
             tempLabel.Text = result;
         }
-        
-        //public int GetHighTemp(int[])
-        //{
-
-        //}
 
         public int[] GetSpecifiedData(string date)
         {
@@ -94,7 +89,7 @@ namespace WeatherStationApp
             }
             catch
             {
-                return new int[] {0, 0, 0, 0, 0, 0};
+                return new int[] {0, 0, 0, 0, 0, 0, 0};
             }
         }
 
@@ -108,6 +103,46 @@ namespace WeatherStationApp
             }
             result += data[data.Length - 1];
             tempLabel.Text = result;
+        }
+
+        public string GetDayState()
+        {
+            return "";
+        }
+
+        public int GetLowTemp()
+        {
+            return 0;
+        }
+
+        public int GetHighTemp()
+        {
+            return 0;
+        }
+
+        public int GetDayPrecipitation()
+        {
+            return 0;
+        }
+
+        public int GetWindSpeed()
+        {
+            return 0;
+        }
+
+        public string GetHourState()
+        {
+            return "";
+        }
+
+        public int GetHourTemp()
+        {
+            return 0;
+        }
+
+        public int GetHourPrecipitation()
+        {
+            return 0;
         }
     }
 }

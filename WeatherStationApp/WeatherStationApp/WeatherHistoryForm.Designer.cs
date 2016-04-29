@@ -291,6 +291,7 @@
             // rainRadioButton
             // 
             this.rainRadioButton.AutoSize = true;
+            this.rainRadioButton.Checked = true;
             this.rainRadioButton.Location = new System.Drawing.Point(7, 20);
             this.rainRadioButton.Name = "rainRadioButton";
             this.rainRadioButton.Size = new System.Drawing.Size(47, 17);

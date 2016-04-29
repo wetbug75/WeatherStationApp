@@ -8,10 +8,49 @@ namespace UnitTestProject1
     public class UnitTest1
     {
         [TestMethod]
+        //tests to see if forecasts are acurate if data already exists for that day
+        public void StoredDataForecastTest()
+        {
+            MainForm form = new MainForm();
+            for (int i = 0; i < 24; i++)
+            {
+                form.weatherInfo.data[0, i, 0] = 50;//temp
+                form.weatherInfo.data[0, i, 1] = 50;//pressure
+                form.weatherInfo.data[0, i, 2] = 10;//wind speed
+                form.weatherInfo.data[0, i, 3] = 15;//precipitation inches
+                form.weatherInfo.data[0, i, 4] = 100;//humidity percentage
+                form.weatherInfo.data[0, i, 5] = 100;//cloud cover percentage
+                form.weatherInfo.data[0, i, 6] = 0;//precipitation type
+            }
+            form.weatherInfo.data[0, 20, 0] = 70;
+            form.weatherInfo.data[0, 21, 0] = 30;
+
+            Assert.IsTrue(form.GetDayState().Equals("Rainy"));
+            Assert.IsTrue(form.GetLowTemp() == 30);
+            Assert.IsTrue(form.GetHighTemp() == 70);
+            Assert.IsTrue(form.GetDayPrecipitation() == 100);
+            Assert.IsTrue(form.GetWindSpeed() == 10);
+            Assert.IsTrue(form.GetHourState().Equals("Rainy"));
+            Assert.IsTrue(form.GetHourTemp() == 50);
+            Assert.IsTrue(form.GetHourPrecipitation() == 100);
+        }
+
+        [TestMethod]
+        public void WeatherInfoIsEmptyTest()
+        {
+            WeatherInfo wi = new WeatherInfo(1);
+            int[] n = new int[7] { 1, 2, 3, 4, 5, 6, 1};
+            wi.AddInfo("4/20/2016", 0, n);
+            Assert.IsTrue(!wi.IsEmpty("4/20/2016", 0));
+            Assert.IsTrue(wi.IsEmpty("4/20/2016", 1));
+            Assert.IsTrue(wi.IsEmpty("4/21/2016", 1));
+        }
+
+        [TestMethod]
         public void AddWeatherInfoTest()
         {
             WeatherInfo wi = new WeatherInfo(1);
-            int[] n = new int[6] { 1, 2, 3, 4, 5, 6 };
+            int[] n = new int[7] { 1, 2, 3, 4, 5, 6, 0};
             wi.AddInfo("4/20/2016", 0, n);
             int[] nCopy = wi.GetInfo("4/20/2016", 0);
 
@@ -55,6 +94,8 @@ namespace UnitTestProject1
             if (form.weatherInfo.data[0, 0, 3] != 0)
                 equal = false;
             if (form.weatherInfo.data[0, 0, 5] != 0)
+                equal = false;
+            if (form.weatherInfo.data[0, 2, 2] != 0)
                 equal = false;
             if (form.weatherInfo.data[0, 2, 2] != 0)
                 equal = false;
